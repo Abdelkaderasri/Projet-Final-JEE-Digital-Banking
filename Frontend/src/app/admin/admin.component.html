@@ -1,0 +1,33 @@
+<div class="container mt-4">
+  <h2 class="mb-4">Dashboard</h2>
+
+  <div class="row">
+    <div class="col-6">
+      <div class="card mb-4">
+        <div class="card-body">
+          <h5 class="card-title">Operations</h5>
+          <canvas ngChartjs [datasets]="operationData" [labels]="operationLabels" [options]="chartOptions"
+            [legend]="true" [chartType]="'bar'">
+          </canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-6">
+      <div class="card mb-4">
+        <div class="card-body">
+          <h5 class="card-title">Customer Operations</h5>
+          <canvas ngChartjs [datasets]="customerData" [labels]="customerLabels" [options]="chartOptions" [legend]="true"
+            [chartType]="'pie'">
+          </canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+</div>

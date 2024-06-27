@@ -1,0 +1,49 @@
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center py-3">
+    <h2>Customers</h2>
+    <button class="btn btn-success" (click)="openAddCustomerModal()" *ngIf="getRoles().includes('ROLE_ADMIN')">Add
+      Customer</button>
+  </div>
+
+  <div class="form-group">
+    <input type="text" class="form-control" [(ngModel)]="keyword" placeholder="Search..." (ngModelChange)="onSearch()">
+  </div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th *ngIf="getRoles().includes('ROLE_ADMIN')" scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let customer of customers; let i = index">
+        <th scope="row">{{ i + 1 + (page * size) }}</th>
+        <td>{{ customer.name }}</td>
+        <td>{{ customer.email }}</td>
+        <td *ngIf="getRoles().includes('ROLE_ADMIN')">
+          <button class="btn btn-primary btn-sm" (click)="openUpdateCustomerModal(customer.id)">Update</button>
+          <button class="btn btn-danger btn-sm ms-2" (click)="openDeleteCustomerModal(customer.id)">Delete</button>
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <nav aria-label="Page navigation" *ngIf="totalPages > 1">
+    <ul class="pagination">
+      <li class="page-item" [class.disabled]="page === 0" (click)="onPageChange(page - 1)">
+        <a class="page-link">Previous</a>
+      </li>
+      <li *ngFor="let i of [].constructor(totalPages); let idx = index" class="page-item" [class.active]="idx === page"
+        (click)="onPageChange(idx)">
+        <a class="page-link">{{ idx + 1 }}</a>
+      </li>
+      <li class="page-item" [class.disabled]="page === totalPages - 1" (click)="onPageChange(page + 1)">
+        <a class="page-link">Next</a>
+      </li>
+    </ul>
+  </nav>
+
+
+</div>

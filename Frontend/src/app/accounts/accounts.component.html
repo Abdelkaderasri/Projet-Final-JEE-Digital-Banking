@@ -1,0 +1,55 @@
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center py-3">
+    <h2>Bank Accounts</h2>
+    <button class="btn btn-success mt-3" (click)="openAddAccountModal()">Add Account</button>
+  </div>
+  <div class="form-group">
+    <input type="text" class="form-control" [(ngModel)]="keyword" placeholder="Search..." (ngModelChange)="onSearch()">
+  </div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Account ID</th>
+        <th scope="col">Balance</th>
+        <th scope="col">Customer Name</th>
+        <th scope="col">Created At</th>
+        <th scope="col">Operations</th>
+        <th scope="col" *ngIf="getRoles().includes('ROLE_ADMIN')">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let bankAccount of bankAccounts; let i = index">
+        <th scope="row">{{ i + 1 + (page * size) }}</th>
+        <td>{{ bankAccount.id }}</td>
+        <td>{{ bankAccount.balance | currency}}</td>
+        <td>{{ bankAccount.customer.name }}</td>
+        <td>{{ bankAccount.createdAt | date }}</td>
+        <td> <button class="btn btn-info btn-sm" (click)="openAccountOperations(bankAccount.id)">Operations</button>
+          <button class="btn btn-success btn-sm ms-2" *ngIf="getRoles().includes('ROLE_ADMIN')"
+            (click)="openAddOperationModal(bankAccount.id)">+</button>
+
+        </td>
+        <td *ngIf="getRoles().includes('ROLE_ADMIN')">
+          <button class="btn btn-primary btn-sm" (click)="openUpdateAccountModal(bankAccount.id)">Update</button>
+          <button class="btn btn-danger btn-sm ms-2" (click)="openDeleteAccountModal(bankAccount.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <nav aria-label="Page navigation" *ngIf="totalPages > 1">
+    <ul class="pagination">
+      <li class="page-item" [class.disabled]="page === 0" (click)="onPageChange(page - 1)">
+        <a class="page-link">Previous</a>
+      </li>
+      <li *ngFor="let i of [].constructor(totalPages); let idx = index" class="page-item" [class.active]="idx === page"
+        (click)="onPageChange(idx)">
+        <a class="page-link">{{ idx + 1 }}</a>
+      </li>
+      <li class="page-item" [class.disabled]="page === totalPages - 1" (click)="onPageChange(page + 1)">
+        <a class="page-link">Next</a>
+      </li>
+    </ul>
+  </nav>
+
+</div>

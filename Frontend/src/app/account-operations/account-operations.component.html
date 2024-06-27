@@ -1,0 +1,25 @@
+<div class="modal-header">
+  <h5 class="modal-title">Account Operations</h5>
+  <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('cancel')"></button>
+</div>
+<div class="modal-body">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Date</th>
+        <th scope="col">Type</th>
+        <th scope="col">Amount</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let operation of operations">
+        <td>{{ operation.operationDate | date }}</td>
+        <td>{{ operation.type }}</td>
+        <td>{{ operation.amount | currency }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary" (click)="activeModal.dismiss('cancel')">Close</button>
+</div>

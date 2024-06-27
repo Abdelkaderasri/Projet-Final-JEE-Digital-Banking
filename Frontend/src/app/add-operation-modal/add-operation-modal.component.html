@@ -1,0 +1,26 @@
+<div class="modal-header">
+  <h5 class="modal-title">Add Operation</h5>
+  <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('cancel')"></button>
+</div>
+<div class="modal-body">
+  <form>
+    <div class="mb-3">
+      <label for="amount" class="form-label">Amount</label>
+      <input type="number" class="form-control" id="amount" [(ngModel)]="operation.amount" name="amount">
+    </div>
+    <div class="mb-3">
+      <label for="type" class="form-label">Type</label>
+      <select class="form-control" id="type" [(ngModel)]="operation.type" name="type">
+        <option *ngFor="let type of operationTypes | keyvalue" [value]="type.key">{{ type.key }}</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="date" class="form-label">Date</label>
+      <input type="date" class="form-control" id="date" [(ngModel)]="operation.operationDate" name="operationDate">
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary" (click)="activeModal.dismiss('cancel')">Cancel</button>
+  <button type="button" class="btn btn-primary" (click)="saveOperation()">Save</button>
+</div>

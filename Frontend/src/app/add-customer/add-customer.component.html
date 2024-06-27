@@ -1,0 +1,20 @@
+<div class="modal-header">
+  <h5 class="modal-title">Add Customer</h5>
+  <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
+</div>
+<div class="modal-body">
+  <form>
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" id="name" [(ngModel)]="customer.name" name="name" required>
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" class="form-control" id="email" [(ngModel)]="customer.email" name="email" required>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary" (click)="activeModal.dismiss('cancel')">Cancel</button>
+  <button type="button" class="btn btn-primary" (click)="addCustomer()">Add Customer</button>
+</div>
